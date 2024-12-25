@@ -1,4 +1,13 @@
 import { createMenuView } from "./menu"
+import { readTerminal } from "./terminal"
+
+type stateType = {
+    currentView: number,
+    localOption: number,
+    confirmDownload: boolean,
+    repository: string,
+    templates: string[]
+}
 
 await (async function(){
     const arg = process.argv.slice(2)
@@ -26,10 +35,12 @@ await (async function(){
     const SELECT_SUB_TEMPLATE = 7
     const CONFIRM = 8
 
-    const STATE = {
+    const STATE:stateType = {
         currentView: CONFIG,
         localOption: 0,
         confirmDownload: false,
+        repository: '',
+        templates: []
     }
 
     while(STATE.currentView !== NONE) {
@@ -59,32 +70,38 @@ await (async function(){
                     NONE,
                 ][ STATE.localOption - 1]
                 break
-            case ADD_SOURCE:
-                STATE.localOption = await createMenuView(
+            case ADD_SOURCE:{
+                const [option, value] = await createMenuView(
                     'Configuracion create-form\nAgregar repositorio fuente\n',
                     [
-                        ' Repositorio: ',
+                        ' Repositorio:_' + STATE.repository,
                         ' < Volver'
                     ]
-                ).render()
+                ).renderInput() as [number, string]
+                STATE.localOption = option
                 if( STATE.localOption === 1 ) {
                     // nuevo repositorio
+                    STATE.repository = value
                 }
                 STATE.currentView = CONFIG
                 break;
-            case ADD_TEMPLATE:
-                STATE.localOption = await createMenuView(
+            }
+            case ADD_TEMPLATE:{
+                const [option, value] = await createMenuView(
                     'Configuracion create-form\nAgregar template\n',
                     [
-                        ' Template url: ',
+                        ' Template url:_ ',
                         ' < Volver'
                     ]
-                ).render()
-                if( STATE.localOption === 1 ) {
-                    // nuevo repositorio
+                ).renderInput() as [number, string]
+                STATE.localOption = option
+                if( STATE.localOption === 1 && value.trim()!=='' ) {
+                    // nuevo template
+                    STATE.templates.push( value )
                 }
                 STATE.currentView = CONFIG
                 break;
+            }
             case CHANGE_USER:
                 STATE.localOption = await createMenuView(
                     'Configuracion create-form\nCambiar usuario de GitHub\n',
