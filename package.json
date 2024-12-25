@@ -5,10 +5,8 @@
   "type":"module",
   "main": "index.js",
   "scripts": {
-    "test": "node --loader ts-node/esm ./src/index.ts",
-    "build": "tsc && tsc-alias",
-    "migration:generate": "prisma migrate dev --name",
-    "postinstall": "npx prisma migrate dev --name auto"
+    "test": "node --watch --loader ts-node/esm ./src/index.ts",
+    "build": "tsc && tsc-alias"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +15,6 @@
     "terminal-i2": "^1.1.1"
   },
   "devDependencies": {
-    "@prisma/client": "^6.1.0",
     "@types/node": "^22.10.2",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.10",
