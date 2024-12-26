@@ -2,12 +2,16 @@ import State from "./state"
 import {
     CONFIG,
     NONE,
+    SELECT_TEMPLATE,
+    SELECT_SUB_TEMPLATE
 } from './constant'
 import configView from "./views/config"
 import addSourceView from "./views/addSource"
 import addTemplateView from "./views/addTemplate"
 import changeUserView from "./views/changeUser"
-import updateTemplates from "./views/updateTemplates"
+import updateTemplatesView from "./views/updateTemplates"
+import selectTemplateView from "./views/selectTemplate"
+import selectSubTemplateView from "./views/selectSubTemplate"
 
 
 await (async function(){
@@ -34,7 +38,7 @@ await (async function(){
         repository: '',
         templates: [],
         user:''
-    })
+    }, { inited:SELECT_TEMPLATE, notInited:CONFIG })
 
     await state.load()
 
@@ -46,7 +50,9 @@ await (async function(){
             addSourceView,
             addTemplateView,
             changeUserView,
-            updateTemplates
+            updateTemplatesView,
+            selectTemplateView,
+            selectSubTemplateView
         ][state.value().currentView as number]
 
         state.setValue({

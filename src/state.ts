@@ -11,8 +11,20 @@ export default class State {
         user:'',
         lastUpdate: 0
     }
-    constructor(initState:stateType) {
+    defaultViews:viewDefaultType = {
+        inited:0,
+        notInited:0
+    }
+    constructor(initState:stateType, views?:viewDefaultType) {
         this.STATE = Object.assign( this.STATE, initState)
+        if( views ) {
+            this.defaultViews.inited = views.inited
+            this.defaultViews.notInited = views.notInited
+        }
+        else if( initState?.currentView ) {
+            this.defaultViews.inited = initState?.currentView
+            this.defaultViews.notInited = initState?.currentView
+        }
     }
 
     setValue(data:stateType) {
@@ -31,6 +43,7 @@ export default class State {
         const jsonFile = await fs.readFileSync('config.json', 'utf-8')
         const json = JSON.parse(jsonFile)
         this.STATE.user = json.userName
+        this.STATE.currentView = json.userName ? this.defaultViews.inited : this.defaultViews.notInited
         this.STATE.repository = json.repoTemplates
         this.STATE.templates = json.templates
         this.STATE.lastUpdate = json.lastUpdate
