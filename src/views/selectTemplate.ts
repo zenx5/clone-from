@@ -1,4 +1,4 @@
-import { CONFIG } from "../constant"
+import { CONFIG, UPDATE_TEMPLATES } from "../constant"
 import { createMenuView } from "../menu"
 
 export default async function selectTemplateView(state:stateType) {
@@ -7,13 +7,24 @@ export default async function selectTemplateView(state:stateType) {
     const templates = [
         ...templatesOne,
         ...templatesTwo,
-        '< Volver'
+        'Actualizar templates',
+        '< Ir a configuración'
     ]
     const option = await createMenuView(
-        'Selecciona Template:\n',
-        templates
+        `Selecciona Template:\n${templates.length==2 ? ' --- Vacio ---\n' : ''}`,
+        templates.map( template => ` ${template}`)
     ).render()
 
+    if( option === templates.length ) {
+        return {
+            currentView: CONFIG
+        }
+    }
+    else if( option === templates.length - 1 ) {
+        return {
+            currentView: UPDATE_TEMPLATES
+        }
+    }
 
     return {
         currentView: CONFIG

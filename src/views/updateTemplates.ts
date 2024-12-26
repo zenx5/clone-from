@@ -1,13 +1,20 @@
+import { writeTerminal } from "../terminal"
 import { CONFIG } from "../constant"
 import { createMenuView } from "../menu"
+import { getIndex } from "../github"
 
 export default async function updateTemplatesView(state:stateType) {
-    const option = await createMenuView(
-        'Configuracion create-form\nActualizando templates...\n',
-        [
-            '[bgBlack][yellow]Para cancelar usa `Ctrl+C`[/yellow][/bgBlack]'
-        ]
-    ).render()
+    writeTerminal('Configuracion create-form\nActualizando templates...\n')
+    if( state.user && state.repository ){
+        const items = await getIndex(state.user, state.repository)
+        await createMenuView(`Hemos terminado.\n${items.length} templates encontrados`, [" > Continuar"]).render()
+        return {
+            currentView: CONFIG,
+            templates: items.map( item => item.path )
+        }
+    }
+    await createMenuView("No se pudo actualizar", [" > Continuar"]).render()
+
     return {
         currentView: CONFIG
     }

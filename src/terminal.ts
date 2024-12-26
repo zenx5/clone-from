@@ -19,6 +19,10 @@ export const readTerminal = async (prompt:string, close?:boolean) => {
     })
 }
 
+export const writeTerminal = async (prompt:string) => {
+    terminal.write(prompt)
+}
+
 export const cleanTerminal = (x:number = 0, y:number = 0) => {
     terminal.write('\x1b[2J\x1b[' + x + ';' + y + 'H');
 }
@@ -36,7 +40,8 @@ export const catchArrows = async () => {
                     resolve({ isArrow: true, name:key.name })
                 }
                 else {
-                    resolve({ isArrow: false, name:key.name })
+                    console.log( key )
+                    resolve({ isArrow: false, name:key?.name ?? key?.sequence })
                 }
             });
         }catch(e){

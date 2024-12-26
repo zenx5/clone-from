@@ -38,10 +38,27 @@ export default class State {
         return this.STATE
     }
 
+    async getJson() {
+        try{
+            const jsonFile = await fs.readFileSync('config.json', 'utf-8')
+            return JSON.parse(jsonFile)
+        }
+        catch(e) {
+            const jsonData = {
+                userName: "",
+                repoTemplates: "",
+                confirmDownload: false,
+                templates: [],
+                lastUpdate: Date.now()
+            }
+            await fs.writeFileSync('config.json', JSON.stringify(jsonData))
+            return jsonData;
+        }
+    }
+
     async load() {
         const current = Date.now()
-        const jsonFile = await fs.readFileSync('config.json', 'utf-8')
-        const json = JSON.parse(jsonFile)
+        const json = await this.getJson()
         this.STATE.user = json.userName
         this.STATE.currentView = json.userName ? this.defaultViews.inited : this.defaultViews.notInited
         this.STATE.repository = json.repoTemplates

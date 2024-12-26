@@ -43,7 +43,7 @@ class Menu2 extends createMenu{
                         this.options[ option - 1 ] = this.options[ option - 1 ].slice(0,-1)
                     }
                 }
-                else if( response.name.length === 1 ){
+                else if( response.name.length === 1 ) {
                     this.options[ option - 1 ] += response.name
                 }
             }
