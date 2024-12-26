@@ -27,6 +27,6 @@
       "resolveFullPaths": true,
       "verbose": false
     },
-    "include": ["src"], // Incluye la carpeta src para la compilación.
+    "include": ["src", "index.d.ts"], // Incluye la carpeta src para la compilación.
     "exclude": ["node_modules"] // Excluye node_modules.
   }
