@@ -1,5 +1,4 @@
 node_modules
 pnpm-lock.yaml
-.lastupdate
-.config
+config.json
 repository.json

@@ -1,10 +1,5 @@
-import { createMenuView } from "./menu"
 import State from "./state"
 import {
-    ADD_SOURCE,
-    ADD_TEMPLATE,
-    CHANGE_USER,
-    UPDATE_TEMPLATES,
     CONFIG,
     NONE,
 } from './constant'
@@ -41,6 +36,8 @@ await (async function(){
         user:''
     })
 
+    await state.load()
+
     while(state.value().currentView !== NONE) {
         const defaultAction = async () => ({ currentView: NONE })
         const ActionView = [
@@ -55,6 +52,7 @@ await (async function(){
         state.setValue({
             ...await ActionView(state.value())
         })
+        await state.update()
     }
     console.log('Bye')
     process.exit(0)

@@ -3,6 +3,7 @@ type stateType = {
     localOption?: number,
     confirmDownload?: boolean,
     repository?: string,
-    templates?: string[]
-    user?: string
+    templates?: string[],
+    user?: string,
+    lastUpdate?: number
 }
