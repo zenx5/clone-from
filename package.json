@@ -1,11 +1,11 @@
 {
-  "name": "create-from",
+  "name": "clone-from",
   "version": "0.0.1-beta",
   "description": "",
   "type":"module",
   "main": "index.js",
   "bin":{
-    "create-app": "./dist/index.js"
+    "clone-from": "./dist/index.js"
   },
   "scripts": {
     "test": "node --watch --loader ts-node/esm ./src/index.ts",
