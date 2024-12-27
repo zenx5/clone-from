@@ -4,6 +4,9 @@
   "description": "",
   "type":"module",
   "main": "index.js",
+  "bin":{
+    "create-app": "./dist/index.js"
+  },
   "scripts": {
     "test": "node --watch --loader ts-node/esm ./src/index.ts",
     "build": "tsc && tsc-alias"
