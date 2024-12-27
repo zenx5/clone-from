@@ -16,7 +16,8 @@ export default async function confirmSelectionView(state:stateType) {
         // `https://github.com/zenx5/test-templates.git`
         // 
         const url = `git@github.com:${state.user}/${state.repository}.git`
-        await getContent(url, state?.selectedTemplate?.template as string)
+        const template = `${state?.selectedTemplate?.template as string}/${state?.selectedTemplate?.subtemplate as string}`
+        await getContent(url, template)
     }
 
     return {
