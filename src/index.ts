@@ -43,7 +43,14 @@ await (async function(){
 
     await state.load()
 
+    if( isCONFIG ) {
+        state.setValue({
+            currentView: CONFIG
+        })
+    }
+
     while(state.value().currentView !== NONE) {
+        const indexView = state.value().currentView as number
         const defaultAction = async () => ({ currentView: NONE })
         const ActionView = [
             defaultAction,
@@ -55,7 +62,7 @@ await (async function(){
             selectTemplateView,
             selectSubTemplateView,
             confirmSelectionView
-        ][state.value().currentView as number]
+        ][ indexView ]
 
         state.setValue({
             ...await ActionView(state.value()) as stateType

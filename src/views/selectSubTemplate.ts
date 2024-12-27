@@ -4,11 +4,11 @@ import { createMenuView } from "../menu"
 
 export default async function selectSubTemplateView(state:stateType) {
     if( !state.templates ) return  {}
-    const template = state?.templates[ state.localOption ?? 0 ]
+    const template = state?.templates[ Number(state.localOption) - 1 ]
     const subTemplates = await getIndex(state.user as string, state.repository as string, template )
     const option = await createMenuView(
-        'Selecciona Template:\n',
-        subTemplates.map( template => ` ${template.name} ` )
+        'Selecciona Sub-Template:\n ',
+        subTemplates.map( item => ` ${item.name} ` )
     ).render()
 
 

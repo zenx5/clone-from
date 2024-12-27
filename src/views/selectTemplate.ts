@@ -5,7 +5,7 @@ import { createMenuView } from "../menu"
 export default async function selectTemplateView(state:stateType) {
     const templates = state.templates ?? []
     const option = await createMenuView(
-        `Selecciona Template:\n${templates.length==2 ? ' --- Vacio ---\n' : ''}`,
+        `Selecciona Template:\n${templates.length==0 ? ' --- Vacio ---\n' : ''}`,
         [
             ...templates.map( template => ` ${template}`),
             ' Actualizar templates',
