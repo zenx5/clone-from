@@ -54,7 +54,7 @@ class Menu2 extends createMenu{
             this.title = ""
             this.options = []
         }
-        const [textOption, value] = this.options[ option - 1 ].split(':_')
+        const [, value] = this.options[ option - 1 ].split(':_')
         return [option, value]
     }
 }

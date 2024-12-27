@@ -34,7 +34,7 @@ export default async function configView(state:stateType) {
             CHANGE_USER,
             UPDATE_TEMPLATES,
             CONFIG,
-            NONE,
+            state?.pastView ?? NONE,
         ][ localOption - 1 ]
     }
 }

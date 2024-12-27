@@ -9,14 +9,14 @@ export default async function updateTemplatesView(state:stateType) {
         const items = await getIndex(state.user, state.repository)
         await createMenuView(`Hemos terminado.\n${items.length} templates encontrados`, [" > Continuar"]).render()
         return {
-            currentView: CONFIG,
+            currentView: state.pastView ?? CONFIG,
             templates: items.map( item => item.path )
         }
     }
     await createMenuView("No se pudo actualizar", [" > Continuar"]).render()
 
     return {
-        currentView: CONFIG
+        currentView: state.pastView ?? CONFIG
     }
 
 }

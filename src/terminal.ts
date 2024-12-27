@@ -40,7 +40,6 @@ export const catchArrows = async () => {
                     resolve({ isArrow: true, name:key.name })
                 }
                 else {
-                    console.log( key )
                     resolve({ isArrow: false, name:key?.name ?? key?.sequence })
                 }
             });
