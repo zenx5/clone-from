@@ -19,7 +19,7 @@ export const getContent = async (url, template) => {
         await execute(`sudo rm -r ${dirname}.cloned 2>.log`);
     }
     catch (e) {
-        console.log('removed dir');
+        // console.log('removed dir')
     }
     try {
         await execute(`git clone ${url} ${dirname}.cloned`);

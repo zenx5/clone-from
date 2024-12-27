@@ -1,6 +1,7 @@
 import { getIndex } from "../github/index.js";
 import { CONFIG, CONFIRM, SELECT_TEMPLATE } from "../constant.js";
 import { createMenuView } from "../menu.js";
+import { downloadTemplate } from "./downloadTemplate.js";
 export default async function selectSubTemplateView(state) {
     if (!state.templates)
         return { currentView: CONFIG };
@@ -14,6 +15,16 @@ export default async function selectSubTemplateView(state) {
         return {
             currentView: SELECT_TEMPLATE
         };
+    }
+    if (!state.confirmDownload) {
+        await downloadTemplate({
+            ...state,
+            selectedTemplate: {
+                template,
+                subtemplate: subTemplates[option - 1].name
+            },
+        });
+        process.exit(0);
     }
     return {
         selectedTemplate: {

@@ -5,7 +5,7 @@ import { getIndex } from "../github/index.js";
 export default async function updateTemplatesView(state) {
     writeTerminal('Configuracion clone-from\nActualizando templates...\n');
     if (state.user && state.repository) {
-        const items = (await getIndex(state.user, state.repository)).filter(item => item.type === 'dir');
+        const items = (await getIndex(state.user, state.repository)).filter(item => item.type === 'dir' && item.name !== '.github');
         await createMenuView(`Hemos terminado.\n${items.length} templates encontrados`, [" > Continuar"]).render();
         return {
             currentView: state.pastView ?? CONFIG,
