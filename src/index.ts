@@ -2,8 +2,7 @@ import State from "./state"
 import {
     CONFIG,
     NONE,
-    SELECT_TEMPLATE,
-    SELECT_SUB_TEMPLATE
+    SELECT_TEMPLATE
 } from './constant'
 import configView from "./views/config"
 import addSourceView from "./views/addSource"
@@ -69,7 +68,6 @@ await (async function(){
         })
         await state.update()
     }
-    console.log('Bye')
     process.exit(0)
 
 })()

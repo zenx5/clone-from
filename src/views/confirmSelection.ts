@@ -1,3 +1,4 @@
+import { getContent } from "../github"
 import { NONE } from "../constant"
 import { createMenuView } from "../menu"
 
@@ -12,6 +13,10 @@ export default async function confirmSelectionView(state:stateType) {
 
     if( option===1 ) {
         console.log('download')
+        // `https://github.com/zenx5/test-templates.git`
+        // 
+        const url = `git@github.com:${state.user}/${state.repository}.git`
+        await getContent(url, state?.selectedTemplate?.template as string)
     }
 
     return {

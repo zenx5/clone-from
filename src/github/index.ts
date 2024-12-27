@@ -12,10 +12,13 @@ export const getIndex = async (user:string, repoName:string, tail:string = '') =
 }
 
 export const getContent = async(url:string, template:string) => {
+    const nameProject = process.argv.slice(2)
     try{
         await execute(`git clone ${url} .cloned`)
-        await execute(`mv .cloned/${template}/* .`)
+        await execute(`mkdir ${nameProject}`)
+        await execute(`mv .cloned/${template}/* ${nameProject}`)
         await execute(`sudo rm -r .cloned`)
+        await execute(`cd ${nameProject}`)
         await execute(`git init`)
         await execute(`git add .`)
         await execute(`git commit -m 'first commit: ${template}' `)

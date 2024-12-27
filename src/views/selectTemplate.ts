@@ -34,6 +34,10 @@ export default async function selectTemplateView(state:stateType) {
     return {
         localOption: option,
         pastView: state.currentView,
+        selectedTemplate: {
+            template:tail,
+            subtemplate: ''
+        },
         currentView: isTemplate ? CONFIRM : SELECT_SUB_TEMPLATE
     }
 
