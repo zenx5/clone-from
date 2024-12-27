@@ -13,6 +13,7 @@ export const getIndex = async (user:string, repoName:string, tail:string = '') =
 
 export const getContent = async(url:string, template:string) => {
     const nameProject = process.argv.slice(2)
+    if( !nameProject ) return;
     try{
         await execute(`git clone ${url} .cloned`)
         await execute(`mkdir ${nameProject}`)

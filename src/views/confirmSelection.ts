@@ -12,11 +12,9 @@ export default async function confirmSelectionView(state:stateType) {
     ).render()
 
     if( option===1 ) {
-        console.log('download')
-        const url2 = `https://github.com/${state.user}/${state.repository}.git`
-        const url = `git@github.com:${state.user}/${state.repository}.git`
+        const url = `https://github.com/${state.user}/${state.repository}.git`
         const template = `${state?.selectedTemplate?.template as string}/${state?.selectedTemplate?.subtemplate as string}`
-        await getContent(url2, template)
+        await getContent(url, template)
     }
 
     return {
