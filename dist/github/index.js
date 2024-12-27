@@ -26,10 +26,7 @@ export const getContent = async (url, template) => {
         await execute(`mkdir ${nameProject}`);
         await execute(`mv ${dirname}.cloned/${template}/* ${nameProject}`);
         await execute(`sudo rm -r ${dirname}.cloned`);
-        await execute(`cd ${nameProject}`);
-        await execute(`git init`);
-        await execute(`git add .`);
-        await execute(`git commit -m 'first commit: ${template}' `);
+        await execute(`cd ${nameProject} && git init && git add . && git commit -m 'first commit: ${template}'`);
     }
     catch (e) {
         console.log(e.message);

@@ -27,10 +27,7 @@ export const getContent = async(url:string, template:string) => {
         await execute(`mkdir ${nameProject}`) as { error:boolean, message:string }
         await execute(`mv ${dirname}.cloned/${template}/* ${nameProject}`) as { error:boolean, message:string }
         await execute(`sudo rm -r ${dirname}.cloned`) as { error:boolean, message:string }
-        await execute(`cd ${nameProject}`) as { error:boolean, message:string }
-        await execute(`git init`)
-        await execute(`git add .`)
-        await execute(`git commit -m 'first commit: ${template}' `)
+        await execute(`cd ${nameProject} && git init && git add . && git commit -m 'first commit: ${template}'`)
     }
     catch(e:any) {
         console.log(e.message)
