@@ -15,7 +15,10 @@ export default class State {
         inited:0,
         notInited:0
     }
+    dirname:string = "";
+
     constructor(initState:stateType, views?:viewDefaultType) {
+        this.dirname = this.rootPath()
         this.STATE = Object.assign( this.STATE, initState)
         if( views ) {
             this.defaultViews.inited = views.inited
@@ -38,9 +41,15 @@ export default class State {
         return this.STATE
     }
 
+    rootPath(){
+        const currentPath = import.meta.dirname
+        return currentPath.slice( 0, currentPath.indexOf('src') )
+    }
+
     async getJson() {
+
         try{
-            const jsonFile = await fs.readFileSync('config.json', 'utf-8')
+            const jsonFile = await fs.readFileSync(`${this.dirname}config.json`, 'utf-8')
             return JSON.parse(jsonFile)
         }
         catch(e) {
@@ -51,7 +60,7 @@ export default class State {
                 templates: [],
                 lastUpdate: Date.now()
             }
-            await fs.writeFileSync('config.json', JSON.stringify(jsonData))
+            await fs.writeFileSync(`${this.dirname}config.json`, JSON.stringify(jsonData))
             return jsonData;
         }
     }
@@ -68,7 +77,7 @@ export default class State {
     }
 
     async update() {
-        await fs.writeFileSync('config.json', JSON.stringify({
+        await fs.writeFileSync(`${this.dirname}config.json`, JSON.stringify({
             userName: this.STATE.user,
             repoTemplates: this.STATE.repository,
             confirmDownload: this.STATE.confirmDownload,
