@@ -1,7 +1,7 @@
 {
   "name": "clone-from",
-  "version": "0.0.5-beta",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Este módulo permite clonar plantillas desde un repositorio especial. Ya no tienes que configurar una y otra vez tu proyecto, almacena tu configuración en un repositorio y usalo cuado quieras.",
   "type":"module",
   "main": "index.js",
   "bin":{
