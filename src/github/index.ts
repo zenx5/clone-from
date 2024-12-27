@@ -39,7 +39,7 @@ export const getContent = async(url:string, template:string) => {
         // await execute(`git add .`)
         // await execute(`git commit -m 'first commit: ${template}' `)
     }
-    catch(e) {
+    catch(e:any) {
         console.log(e.message)
     }
 }
