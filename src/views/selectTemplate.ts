@@ -1,34 +1,40 @@
-import { CONFIG, UPDATE_TEMPLATES } from "../constant"
+import { getIndex } from "../github"
+import { CONFIG, UPDATE_TEMPLATES, SELECT_SUB_TEMPLATE, CONFIRM } from "../constant"
 import { createMenuView } from "../menu"
 
 export default async function selectTemplateView(state:stateType) {
-    const templatesTwo = state.templates ?? []
-    const templates = [
-        ...templatesTwo,
-        'Actualizar templates',
-        '< Ir a configuración'
-    ]
+    const templates = state.templates ?? []
     const option = await createMenuView(
         `Selecciona Template:\n${templates.length==2 ? ' --- Vacio ---\n' : ''}`,
-        templates.map( template => ` ${template}`)
+        [
+            ...templates.map( template => ` ${template}`),
+            ' Actualizar templates',
+            ' < Ir a configuración'
+        ]
     ).render()
 
-    if( option === templates.length ) {
+    if( option === templates.length + 2 ) {
         return {
             pastView: state.currentView,
             currentView: CONFIG
         }
     }
-    else if( option === templates.length - 1 ) {
+    else if( option === templates.length + 1 ) {
         return {
             pastView: state.currentView,
             currentView: UPDATE_TEMPLATES
         }
     }
 
+    const tail = templates[ option - 1 ]
+    const items = await getIndex(state.user as string, state.repository as string, tail)
+
+    const isTemplate = items.filter( item => item.type==='file' ).length > 0
+
     return {
+        localOption: option,
         pastView: state.currentView,
-        currentView: CONFIG
+        currentView: isTemplate ? CONFIRM : SELECT_SUB_TEMPLATE
     }
 
 }

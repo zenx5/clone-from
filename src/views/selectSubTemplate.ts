@@ -1,20 +1,23 @@
-import { CONFIG } from "../constant"
+import { getIndex } from "../github"
+import { CONFIRM } from "../constant"
 import { createMenuView } from "../menu"
 
 export default async function selectSubTemplateView(state:stateType) {
-    const templatesTwo = state.templates ?? []
-    const templates = [
-        ...templatesTwo,
-        '< Volver'
-    ]
+    if( !state.templates ) return  {}
+    const template = state?.templates[ state.localOption ?? 0 ]
+    const subTemplates = await getIndex(state.user as string, state.repository as string, template )
     const option = await createMenuView(
         'Selecciona Template:\n',
-        templates
+        subTemplates.map( template => ` ${template.name} ` )
     ).render()
 
 
     return {
-        currentView: CONFIG
+        selectedTemplate: {
+            template,
+            subtemplate: subTemplates[ option - 1 ].name
+        },
+        currentView: CONFIRM
     }
 
 }

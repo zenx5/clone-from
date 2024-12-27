@@ -1,4 +1,4 @@
-import { CONFIG } from "../constant"
+import { NONE } from "../constant"
 import { createMenuView } from "../menu"
 
 export default async function confirmSelectionView(state:stateType) {
@@ -10,9 +10,12 @@ export default async function confirmSelectionView(state:stateType) {
         ]
     ).render()
 
+    if( option===1 ) {
+        console.log('download')
+    }
 
     return {
-        currentView: CONFIG
+        currentView: NONE
     }
 
 }

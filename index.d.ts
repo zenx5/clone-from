@@ -12,7 +12,11 @@ type stateType = {
     repository?: string,
     templates?: string[],
     user?: string,
-    lastUpdate?: number
+    lastUpdate?: number,
+    selectedTemplate?: {
+        template?:'',
+        subtemplate?: ''
+    }
 }
 
 type viewDefaultType = {

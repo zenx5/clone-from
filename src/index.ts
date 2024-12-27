@@ -12,6 +12,7 @@ import changeUserView from "./views/changeUser"
 import updateTemplatesView from "./views/updateTemplates"
 import selectTemplateView from "./views/selectTemplate"
 import selectSubTemplateView from "./views/selectSubTemplate"
+import confirmSelectionView from "./views/confirmSelection"
 
 
 await (async function(){
@@ -52,11 +53,12 @@ await (async function(){
             changeUserView,
             updateTemplatesView,
             selectTemplateView,
-            selectSubTemplateView
+            selectSubTemplateView,
+            confirmSelectionView
         ][state.value().currentView as number]
 
         state.setValue({
-            ...await ActionView(state.value())
+            ...await ActionView(state.value()) as stateType
         })
         await state.update()
     }

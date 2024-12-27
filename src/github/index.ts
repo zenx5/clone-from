@@ -1,11 +1,10 @@
 import { execute } from './command'
 
-export const getIndex = async (user:string, repoName:string) => {
-    const url = `https://api.github.com/repos/${user}/${repoName}/contents`
+export const getIndex = async (user:string, repoName:string, tail:string = '') => {
+    const url = `https://api.github.com/repos/${user}/${repoName}/contents/${tail}`
     try{
         const response = await fetch(url)
-        const data = await response.json() as { type:string, path:string, name:string }[]
-        return data.filter( item => item.type==='dir' )
+        return await response.json() as { type:string, path:string, name:string }[]
     }
     catch(e){
         return []
