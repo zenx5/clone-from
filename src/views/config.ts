@@ -12,7 +12,7 @@ const CHANGE_DOWNLOAD_PREFER = 4
 
 export default async function configView(state:stateType) {
     const localOption = await createMenuView(
-        'Configuracion create-form\n',
+        'Configuracion clone-from\n',
         [
             ' Agregar repositorio fuente',
             ' Cambiar usuario de Github',

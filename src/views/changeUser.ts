@@ -5,7 +5,7 @@ const SAVE = 1
 
 export default async function changeUserView(state:stateType) {
     const [option, value] = await createMenuView(
-        'Configuracion create-form\nCambiar usuario de GitHub\n',
+        'Configuracion clone-from\nCambiar usuario de GitHub\n',
         [
             ' Usuario:_'+state.user,
             ' < Volver'

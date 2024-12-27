@@ -5,7 +5,7 @@ const SAVE = 1
 
 export default async function addSourceView(state:stateType) {
     const [option, value] = await createMenuView(
-        'Configuracion create-form\nAgregar repositorio fuente\n',
+        'Configuracion clone-from\nAgregar repositorio fuente\n',
         [
             ' Repositorio:_' + state.repository,
             ' < Volver'

@@ -1,6 +1,7 @@
 import { getIndex } from "../github"
 import { CONFIG, UPDATE_TEMPLATES, SELECT_SUB_TEMPLATE, CONFIRM, NONE } from "../constant"
 import { createMenuView } from "../menu"
+import { downloadTemplate } from "./downloadTemplate"
 
 export default async function selectTemplateView(state:stateType) {
     const templates = state.templates ?? []
@@ -37,6 +38,17 @@ export default async function selectTemplateView(state:stateType) {
     const items = await getIndex(state.user as string, state.repository as string, tail)
 
     const isTemplate = items.filter( item => item.type==='file' ).length > 0
+
+    if( isTemplate && !state.confirmDownload ) {
+        await downloadTemplate({
+            ...state,
+            selectedTemplate: {
+                template:tail,
+                subtemplate: ''
+            },
+        })
+        process.exit(0)
+    }
 
     return {
         localOption: option,

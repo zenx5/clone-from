@@ -14,8 +14,8 @@ type stateType = {
     user?: string,
     lastUpdate?: number,
     selectedTemplate?: {
-        template?:'',
-        subtemplate?: ''
+        template?: string,
+        subtemplate?: string
     }
 }
 

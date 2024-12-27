@@ -3,7 +3,7 @@ import { CONFIG } from "../constant.js";
 import { createMenuView } from "../menu.js";
 import { getIndex } from "../github/index.js";
 export default async function updateTemplatesView(state) {
-    writeTerminal('Configuracion create-form\nActualizando templates...\n');
+    writeTerminal('Configuracion clone-from\nActualizando templates...\n');
     if (state.user && state.repository) {
         const items = (await getIndex(state.user, state.repository)).filter(item => item.type === 'dir');
         await createMenuView(`Hemos terminado.\n${items.length} templates encontrados`, [" > Continuar"]).render();

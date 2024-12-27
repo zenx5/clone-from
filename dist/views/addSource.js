@@ -2,7 +2,7 @@ import { CONFIG } from "../constant.js";
 import { createMenuView } from "../menu.js";
 const SAVE = 1;
 export default async function addSourceView(state) {
-    const [option, value] = await createMenuView('Configuracion create-form\nAgregar repositorio fuente\n', [
+    const [option, value] = await createMenuView('Configuracion clone-from\nAgregar repositorio fuente\n', [
         ' Repositorio:_' + state.repository,
         ' < Volver'
     ]).renderInput();

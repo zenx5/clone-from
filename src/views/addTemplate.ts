@@ -6,7 +6,7 @@ const SAVE = 1
 export default async function addTemplateView(state:stateType) {
     const templates = state.templates?.map( template => ` > ${template} -borrar-` ) ?? []
     const [option, value] = await createMenuView(
-        'Configuracion create-form\nAgregar template\n',
+        'Configuracion clone-from\nAgregar template\n',
         [
             ...templates,
             ' Template url:_ ',

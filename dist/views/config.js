@@ -2,7 +2,7 @@ import { createMenuView } from "../menu.js";
 import { ADD_SOURCE, CHANGE_USER, UPDATE_TEMPLATES, CONFIG, NONE, } from '../constant.js';
 const CHANGE_DOWNLOAD_PREFER = 4;
 export default async function configView(state) {
-    const localOption = await createMenuView('Configuracion create-form\n', [
+    const localOption = await createMenuView('Configuracion clone-from\n', [
         ' Agregar repositorio fuente',
         ' Cambiar usuario de Github',
         ' Actualizar templates',

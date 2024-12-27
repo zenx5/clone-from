@@ -1,6 +1,6 @@
-import { getContent } from "../github"
 import { NONE } from "../constant"
 import { createMenuView } from "../menu"
+import { downloadTemplate } from "./downloadTemplate"
 
 export default async function confirmSelectionView(state:stateType) {
     const option = await createMenuView(
@@ -11,11 +11,7 @@ export default async function confirmSelectionView(state:stateType) {
         ]
     ).render()
 
-    if( option===1 ) {
-        const url = `https://github.com/${state.user}/${state.repository}.git`
-        const template = `${state?.selectedTemplate?.template as string}/${state?.selectedTemplate?.subtemplate as string}`
-        await getContent(url, template)
-    }
+    if( option===1 ) downloadTemplate(state)
 
     return {
         currentView: NONE
