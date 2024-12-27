@@ -1,5 +1,5 @@
 import { getIndex } from "../github"
-import { CONFIG, UPDATE_TEMPLATES, SELECT_SUB_TEMPLATE, CONFIRM } from "../constant"
+import { CONFIG, UPDATE_TEMPLATES, SELECT_SUB_TEMPLATE, CONFIRM, NONE } from "../constant"
 import { createMenuView } from "../menu"
 
 export default async function selectTemplateView(state:stateType) {
@@ -8,12 +8,19 @@ export default async function selectTemplateView(state:stateType) {
         `Selecciona Template:\n${templates.length==0 ? ' --- Vacio ---\n' : ''}`,
         [
             ...templates.map( template => ` ${template}`),
-            ' Actualizar templates',
-            ' < Ir a configuración'
+            ' Actualizar templates ',
+            ' Ir a configuración > ',
+            ' < Salir '
         ]
     ).render()
 
-    if( option === templates.length + 2 ) {
+    if( option === templates.length + 3 ) {
+        return {
+            pastView: state.currentView,
+            currentView: NONE
+        }
+    }
+    else if( option === templates.length + 2 ) {
         return {
             pastView: state.currentView,
             currentView: CONFIG

@@ -1,14 +1,21 @@
 import { getIndex } from "../github/index.js";
-import { CONFIG, UPDATE_TEMPLATES, SELECT_SUB_TEMPLATE, CONFIRM } from "../constant.js";
+import { CONFIG, UPDATE_TEMPLATES, SELECT_SUB_TEMPLATE, CONFIRM, NONE } from "../constant.js";
 import { createMenuView } from "../menu.js";
 export default async function selectTemplateView(state) {
     const templates = state.templates ?? [];
     const option = await createMenuView(`Selecciona Template:\n${templates.length == 0 ? ' --- Vacio ---\n' : ''}`, [
         ...templates.map(template => ` ${template}`),
-        ' Actualizar templates',
-        ' < Ir a configuración'
+        ' Actualizar templates ',
+        ' Ir a configuración > ',
+        ' < Salir '
     ]).render();
-    if (option === templates.length + 2) {
+    if (option === templates.length + 3) {
+        return {
+            pastView: state.currentView,
+            currentView: NONE
+        };
+    }
+    else if (option === templates.length + 2) {
         return {
             pastView: state.currentView,
             currentView: CONFIG
